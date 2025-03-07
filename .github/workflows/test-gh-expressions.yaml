@@ -1,0 +1,33 @@
+name: "test-gh-expressions"
+
+on:
+  push:
+
+permissions: {}
+
+concurrency:
+  group: "${{github.workflow}}-${{github.ref}}"
+
+  # Cancel in-progress jobs for efficiency
+  cancel-in-progress: true
+
+jobs:
+  test-gh-expressions:
+    strategy:
+      matrix:
+        include:
+          - use_shared_libs: true
+            upload_binaries: false
+          - use_shared_libs: false
+            upload_binaries: true
+
+    runs-on: "ubuntu-latest"
+    steps:
+      - run: "echo use_shared_libs=${{matrix.use_shared_libs}}"
+      - run: "echo upload_binaries=${{matrix.upload_binaries}}"
+
+      - if: "matrix.upload_binaries == 'true'"
+        run: "echo upload_binaries == 'true'"
+
+      - if: "matrix.upload_binaries == '1'"
+        run: "echo upload_binaries == '1'"
