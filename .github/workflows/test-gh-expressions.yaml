@@ -23,6 +23,9 @@ jobs:
 
     runs-on: "ubuntu-latest"
     steps:
+      - run: "echo use_shared_libs=${{matrix.use_shared_libs}}"
+      - run: "echo upload_binaries=${{matrix.upload_binaries}}"
+
       - if: "matrix.upload_binaries == true"
         run: "echo upload_binaries == 'true'"
 
