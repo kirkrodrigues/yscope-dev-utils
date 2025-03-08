@@ -28,8 +28,9 @@ jobs:
       - run: "echo use_shared_libs=${{toJSON(matrix.use_shared_libs)}}"
       - run: "echo upload_binaries=${{toJSON(matrix.upload_binaries)}}"
 
-      - if: "string && 'string'"
-        run: "echo string && 'string'"
+      - run: "echo $PATH"
 
-      - if: "true && 'string'"
-        run: "echo string && 'string'"
+      - run: >-
+          echo "/usr/bin/abc" >> "$GITHUB_PATH""
+
+      - run: "echo $PATH"
