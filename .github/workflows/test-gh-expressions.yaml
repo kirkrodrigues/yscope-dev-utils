@@ -28,20 +28,8 @@ jobs:
       - run: "echo use_shared_libs=${{toJSON(matrix.use_shared_libs)}}"
       - run: "echo upload_binaries=${{toJSON(matrix.upload_binaries)}}"
 
-      - if: "matrix.upload_binaries == true"
-        run: "echo upload_binaries == 'true'"
+      - if: "string && 'string'"
+        run: "echo string && 'string'"
 
-      - if: "matrix.upload_binaries == 1"
-        run: "echo upload_binaries == '1'"
-
-      - uses: "./.github/actions/test-action"
-        with:
-          bool: "${{matrix.upload_binaries}}"
-
-      - uses: "./.github/actions/test-action"
-        with:
-          bool: "true"
-
-      - uses: "./.github/actions/test-action"
-        with:
-          bool: 1
+      - if: "true && 'string'"
+        run: "echo string && 'string'"
