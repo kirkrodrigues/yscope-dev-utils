@@ -23,6 +23,10 @@ jobs:
 
     runs-on: "ubuntu-latest"
     steps:
+      - uses: "actions/checkout@v4"
+        with:
+          submodules: "recursive"
+
       - run: "echo use_shared_libs=${{toJSON(matrix.use_shared_libs)}}"
       - run: "echo upload_binaries=${{toJSON(matrix.upload_binaries)}}"
 
