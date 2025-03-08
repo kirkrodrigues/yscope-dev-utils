@@ -8,10 +8,13 @@ runs:
   using: "composite"
   steps:
     - if: "inputs.bool == true"
+      shell: "bash"
       run: "echo bool == true"
 
     - if: "inputs.bool == 'true'"
+      shell: "bash"
       run: "echo bool == 'true'"
 
     - if: "inputs.bool == 1"
+      shell: "bash"
       run: "echo bool == 1"
