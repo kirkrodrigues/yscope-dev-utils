@@ -31,3 +31,15 @@ jobs:
 
       - if: "matrix.upload_binaries == 1"
         run: "echo upload_binaries == '1'"
+
+      - uses: "./.github/actions/test-action"
+        with:
+          bool: true
+
+      - uses: "./.github/actions/test-action"
+        with:
+          bool: "true"
+
+      - uses: "./.github/actions/test-action"
+        with:
+          bool: 1

@@ -1,0 +1,17 @@
+name: "test"
+
+inputs:
+  bool:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - if: "inputs.bool == true"
+      run: "echo bool == true"
+
+    - if: "inputs.bool == 'true'"
+      run: "echo bool == 'true'"
+
+    - if: "inputs.bool == 1"
+      run: "echo bool == 1"
