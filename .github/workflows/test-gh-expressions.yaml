@@ -31,6 +31,6 @@ jobs:
       - run: "echo $PATH"
 
       - run: >-
-          echo "/usr/bin/abc" >> "$GITHUB_PATH""
+          echo "/usr/bin/abc" >> "$GITHUB_PATH"
 
       - run: "echo $PATH"
