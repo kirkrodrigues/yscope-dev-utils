@@ -66,9 +66,7 @@ def main(argv=None):
     return 0
 
 
-def _validate_global_variable_prefix(
-    taskfile_path: Path, taskfile: Dict[str, Any]
-) -> bool:
+def _validate_global_variable_prefix(taskfile_path: Path, taskfile: Dict[str, Any]) -> bool:
     """
     Validates that every taskfile-level (global) variable is prefixed with `G_`.
 
