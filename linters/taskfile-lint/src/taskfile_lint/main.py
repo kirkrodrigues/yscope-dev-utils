@@ -125,8 +125,7 @@ def _validate_task_attribute_order_for_all_tasks(
             logger.error(f"{taskfile_path}: Task '{task_name}' is neither a dictionary nor a list.")
             continue
 
-    if linting_failed:
-        return False
+    return not linting_failed
 
 
 def _validate_task_attribute_order(
