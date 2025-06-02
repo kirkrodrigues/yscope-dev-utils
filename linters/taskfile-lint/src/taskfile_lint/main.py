@@ -59,12 +59,38 @@ def main(argv=None):
         doc = yaml.safe_load(f)
 
     linting_failed |= _validate_global_variable_prefix(taskfile_path, doc)
+    linting_failed |= _validate_tasks_ordered_by_visibility(taskfile_path, doc)
     linting_failed |= _validate_task_attribute_order_for_all_tasks(taskfile_path, doc)
     if linting_failed:
         return 1
 
     return 0
 
+def _validate_tasks_ordered_by_visibility(taskfile_path: Path, taskfile: Dict[str, Any]) -> bool:
+    """
+    Validates that tasks in the taskfile are ordered so that internal tasks appear after
+    non-internal tasks.
+
+    :param taskfile_path:
+    :param taskfile:
+    :return: Whether all internal tasks appear after all non-internal tasks.
+    """
+    linting_failed = False
+    last_task_was_internal = False
+    for task_name, task_attributes in taskfile["tasks"].items():
+        if "internal" in task_attributes and task_attributes["internal"]:
+            last_task_was_internal = True
+        elif last_task_was_internal:
+            print(
+                f"{taskfile_path}: Task '{task_name}' is non-internal but appears after an internal"
+                f" task.",
+                file=sys.stderr,
+            )
+            linting_failed = True
+
+            last_task_was_internal = False
+
+    return not linting_failed
 
 def _validate_global_variable_prefix(taskfile_path: Path, taskfile: Dict[str, Any]) -> bool:
     """
